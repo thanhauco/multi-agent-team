@@ -6,7 +6,7 @@
   - Create core data models and enums (AgentRole, WorkflowPhase, ValidationStatus)
   - _Requirements: 1.1, 1.2_
 
-- [ ] 2. Implement Context Manager
+- [x] 2. Implement Context Manager
   - [x] 2.1 Create ContextEntry and Context data models
     - Define ContextEntry dataclass with id, agent_role, output, metadata, timestamp, dependencies
     - Implement Context class for aggregating multiple entries
@@ -19,13 +19,13 @@
     - Add get_context_history and clear_context methods
     - _Requirements: 3.1, 3.2, 3.3, 3.5_
 
-  - [-] 2.3 Implement file-based context persistence
+  - [x] 2.3 Implement file-based context persistence
     - Create JSON-based storage for context entries
     - Implement load and save operations
     - _Requirements: 3.5_
 
 - [ ] 3. Implement Workflow Manager
-  - [ ] 3.1 Create workflow state models
+  - [-] 3.1 Create workflow state models
     - Define WorkflowConfig and WorkflowState dataclasses
     - Implement ValidationResult and ValidationError models
     - _Requirements: 2.3_
