@@ -67,14 +67,14 @@
     - Support template variables
     - _Requirements: 7.1, 7.2, 7.5_
 
-  - [-] 5.2 Implement AgentLoader class
+  - [x] 5.2 Implement AgentLoader class
     - Write load_agent method to instantiate agents from templates
     - Create reload_configurations for hot-reload
     - Implement validate_template method
     - Add get_available_roles method
     - _Requirements: 1.2, 1.3, 7.1, 7.3, 7.4_
 
-  - [ ] 5.3 Create default agent templates
+  - [-] 5.3 Create default agent templates
     - Write product_analyst.md template
     - Write architect.md template
     - Write developer.md template
