@@ -25,12 +25,12 @@
     - _Requirements: 3.5_
 
 - [ ] 3. Implement Workflow Manager
-  - [-] 3.1 Create workflow state models
+  - [x] 3.1 Create workflow state models
     - Define WorkflowConfig and WorkflowState dataclasses
     - Implement ValidationResult and ValidationError models
     - _Requirements: 2.3_
 
-  - [ ] 3.2 Implement WorkflowManager class
+  - [-] 3.2 Implement WorkflowManager class
     - Write initialize_workflow method
     - Create transition_phase with validation logic
     - Implement validate_phase_completion method
