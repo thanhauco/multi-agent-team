@@ -61,13 +61,13 @@
     - _Requirements: 1.4_
 
 - [ ] 5. Implement Agent Loader and template system
-  - [-] 5.1 Create agent template parser
+  - [x] 5.1 Create agent template parser
     - Parse markdown template files
     - Extract sections (responsibilities, constraints, system prompt, validation rules)
     - Support template variables
     - _Requirements: 7.1, 7.2, 7.5_
 
-  - [ ] 5.2 Implement AgentLoader class
+  - [-] 5.2 Implement AgentLoader class
     - Write load_agent method to instantiate agents from templates
     - Create reload_configurations for hot-reload
     - Implement validate_template method
