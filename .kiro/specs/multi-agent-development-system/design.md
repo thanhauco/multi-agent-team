@@ -14,6 +14,53 @@ The core design philosophy emphasizes:
 
 ### High-Level Architecture
 
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          Multi-Agent System Architecture                     │
+│                                                                              │
+│  ┌──────────────┐                                                           │
+│  │ CLI Interface│                                                           │
+│  └──────┬───────┘                                                           │
+│         │                                                                    │
+│         ▼                                                                    │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                     Agent Orchestrator                               │   │
+│  │  ┌────────────────────────────────────────────────────────────┐    │   │
+│  │  │  Workflow Coordination │ Agent Invocation │ Error Handling │    │   │
+│  │  └────────────────────────────────────────────────────────────┘    │   │
+│  └───┬─────────────┬──────────────┬──────────────┬──────────────┬─────┘   │
+│      │             │              │              │              │           │
+│      ▼             ▼              ▼              ▼              ▼           │
+│  ┌────────┐  ┌──────────┐  ┌──────────┐  ┌─────────┐  ┌──────────┐       │
+│  │Context │  │ Workflow │  │  Agent   │  │ Logging │  │ Version  │       │
+│  │Manager │  │ Manager  │  │  Loader  │  │ System  │  │ Control  │       │
+│  └────┬───┘  └─────┬────┘  └────┬─────┘  └────┬────┘  └────┬─────┘       │
+│       │            │             │             │             │              │
+│       ▼            ▼             ▼             ▼             ▼              │
+│  ┌────────┐  ┌─────────┐  ┌──────────────────────────────────────┐       │
+│  │Context │  │Workflow │  │        Agent Instances               │       │
+│  │ Store  │  │  State  │  │  ┌────────┐ ┌────────┐ ┌─────────┐ │       │
+│  │        │  │         │  │  │Product │ │Architect│ │Developer│ │       │
+│  │Depend. │  │Validat. │  │  │Analyst │ │        │ │         │ │       │
+│  │Tracker │  │  Rules  │  │  └───┬────┘ └───┬────┘ └────┬────┘ │       │
+│  └────────┘  └─────────┘  │      │          │           │       │       │
+│                            │  ┌───┴──────────┴───────────┴────┐  │       │
+│                            │  │  ┌────────┐ ┌──────────────┐ │  │       │
+│                            │  │  │Debugger│ │Code Reviewer │ │  │       │
+│                            │  │  └───┬────┘ └──────┬───────┘ │  │       │
+│                            │  └──────┼─────────────┼─────────┘  │       │
+│                            └─────────┼─────────────┼────────────┘       │
+│                                      │             │                      │
+│                                      ▼             ▼                      │
+│                            ┌──────────────────────────────┐              │
+│                            │      LLM Provider Layer      │              │
+│                            │  ┌────────┐    ┌──────────┐ │              │
+│                            │  │ Claude │    │  OpenAI  │ │              │
+│                            │  └────────┘    └──────────┘ │              │
+│                            └──────────────────────────────┘              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
 ```mermaid
 graph TB
     CLI[CLI Interface] --> Orchestrator[Agent Orchestrator]
@@ -46,6 +93,56 @@ graph TB
 ### Component Architecture
 
 The system is organized into the following layers:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        LAYER ARCHITECTURE                        │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  ┌────────────────────────────────────────────────────────┐    │
+│  │              INTERFACE LAYER                           │    │
+│  │  ┌──────────────┐         ┌──────────────┐           │    │
+│  │  │     CLI      │         │  REST API    │           │    │
+│  │  └──────────────┘         └──────────────┘           │    │
+│  └────────────────────────────────────────────────────────┘    │
+│                           │                                      │
+│  ┌────────────────────────▼───────────────────────────────┐    │
+│  │           ORCHESTRATION LAYER                          │    │
+│  │  ┌──────────────────┐    ┌──────────────────┐        │    │
+│  │  │ Agent Orchestrator│    │ Workflow Manager │        │    │
+│  │  └──────────────────┘    └──────────────────┘        │    │
+│  └────────────────────────────────────────────────────────┘    │
+│                           │                                      │
+│  ┌────────────────────────▼───────────────────────────────┐    │
+│  │                 AGENT LAYER                            │    │
+│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐    │    │
+│  │  │Product  │ │Architect│ │Developer│ │Debugger │    │    │
+│  │  │Analyst  │ │         │ │         │ │         │    │    │
+│  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘    │    │
+│  │                    ┌─────────┐                        │    │
+│  │                    │  Code   │                        │    │
+│  │                    │Reviewer │                        │    │
+│  │                    └─────────┘                        │    │
+│  └────────────────────────────────────────────────────────┘    │
+│                           │                                      │
+│  ┌────────────────────────▼───────────────────────────────┐    │
+│  │           INFRASTRUCTURE LAYER                         │    │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────┐   │    │
+│  │  │   Context    │  │   Logging    │  │  Config  │   │    │
+│  │  │   Manager    │  │   System     │  │  Loader  │   │    │
+│  │  └──────────────┘  └──────────────┘  └──────────┘   │    │
+│  └────────────────────────────────────────────────────────┘    │
+│                           │                                      │
+│  ┌────────────────────────▼───────────────────────────────┐    │
+│  │            INTEGRATION LAYER                           │    │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────────────┐   │    │
+│  │  │   LLM    │  │   Git    │  │   File System    │   │    │
+│  │  │ Provider │  │          │  │                  │   │    │
+│  │  └──────────┘  └──────────┘  └──────────────────┘   │    │
+│  └────────────────────────────────────────────────────────┘    │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 1. **Interface Layer**: CLI and API interfaces for user interaction
 2. **Orchestration Layer**: Workflow management and agent coordination
@@ -116,6 +213,44 @@ class WorkflowManager:
 ```
 
 **Workflow Phases**:
+
+```
+    Sequential Workflow with Validation & Rollback
+    
+    ┌──────────────┐
+    │   Product    │
+    │   Analysis   │
+    └──────┬───────┘
+           │
+           ▼
+    ┌──────────────┐      Validation
+    │ Architecture │◄─────── Failed ───┐
+    │    Design    │                    │
+    └──────┬───────┘                    │
+           │                             │
+           ▼                             │
+    ┌──────────────┐                    │
+    │Implementat.  │                    │
+    └──────┬───────┘                    │
+           │                             │
+           ▼                             │
+    ┌──────────────┐      Bugs          │
+    │  Debugging   │◄──── Found ────────┤
+    └──────┬───────┘                    │
+           │                             │
+           ▼                             │
+    ┌──────────────┐      Issues        │
+    │     Code     │◄──── Found ────────┘
+    │    Review    │
+    └──────┬───────┘
+           │
+           ▼
+    ┌──────────────┐
+    │  Deployment  │
+    │   (Future)   │
+    └──────────────┘
+```
+
 1. Product Analysis
 2. Architecture Design
 3. Implementation
@@ -431,29 +566,56 @@ MOCK_LLM_RESPONSES = {
 
 ```
 project_root/
-├── agents/
-│   ├── templates/
-│   │   ├── product_analyst.md
-│   │   ├── architect.md
-│   │   ├── developer.md
-│   │   ├── debugger.md
-│   │   └── code_reviewer.md
-│   └── custom/
+├── agents/                          # Agent configuration
+│   ├── templates/                   # Default agent templates
+│   │   ├── product_analyst.md      # Product analysis agent config
+│   │   ├── architect.md            # Architecture agent config
+│   │   ├── developer.md            # Developer agent config
+│   │   ├── debugger.md             # Debugger agent config
+│   │   └── code_reviewer.md        # Code reviewer agent config
+│   └── custom/                      # User-defined templates
 │       └── [user-defined templates]
-├── workflows/
-│   ├── default_workflow.yaml
-│   └── custom_workflows/
-├── config/
-│   ├── system_config.yaml
-│   ├── llm_config.yaml
-│   └── logging_config.yaml
-├── src/
-│   ├── orchestration/
-│   ├── agents/
-│   ├── context/
-│   ├── workflow/
-│   └── integrations/
-└── tests/
+│
+├── workflows/                       # Workflow definitions
+│   ├── default_workflow.yaml       # Standard development workflow
+│   └── custom_workflows/           # Project-specific workflows
+│
+├── config/                          # System configuration
+│   ├── system_config.yaml          # Core system settings
+│   ├── llm_config.yaml             # LLM provider settings
+│   └── logging_config.yaml         # Logging configuration
+│
+├── src/                             # Source code
+│   ├── orchestration/              # Orchestrator & workflow manager
+│   │   ├── orchestrator.py
+│   │   └── workflow_manager.py
+│   ├── agents/                      # Agent implementations
+│   │   ├── base_agent.py
+│   │   ├── product_analyst.py
+│   │   ├── architect.py
+│   │   ├── developer.py
+│   │   ├── debugger.py
+│   │   └── code_reviewer.py
+│   ├── context/                     # Context management
+│   │   ├── context_manager.py
+│   │   └── dependency_tracker.py
+│   ├── workflow/                    # Workflow state & validation
+│   │   ├── state_manager.py
+│   │   └── validators.py
+│   └── integrations/                # External integrations
+│       ├── llm_providers.py
+│       ├── version_control.py
+│       └── logging_system.py
+│
+├── tests/                           # Test suite
+│   ├── unit/                        # Unit tests
+│   ├── integration/                 # Integration tests
+│   └── e2e/                         # End-to-end tests
+│
+└── .multi_agent/                    # Runtime data (gitignored)
+    ├── context/                     # Context store
+    ├── logs/                        # Agent logs
+    └── workflows/                   # Workflow state
 ```
 
 ### Configuration Files
@@ -497,6 +659,50 @@ default_provider: "claude"
 ## Performance Considerations
 
 ### Optimization Strategies
+
+```
+    Performance Optimization Flow
+    
+    ┌─────────────────────────────────────────────────┐
+    │         Parallel Agent Execution                │
+    │                                                 │
+    │  Task Queue                                     │
+    │  ┌────────┐  ┌────────┐  ┌────────┐           │
+    │  │ Task 1 │  │ Task 2 │  │ Task 3 │           │
+    │  └───┬────┘  └───┬────┘  └───┬────┘           │
+    │      │           │           │                  │
+    │      └───────────┼───────────┘                 │
+    │                  │                              │
+    │         ┌────────▼────────┐                    │
+    │         │  Thread Pool    │                    │
+    │         │  (Max 3 agents) │                    │
+    │         └────────┬────────┘                    │
+    │                  │                              │
+    │      ┌───────────┼───────────┐                │
+    │      ▼           ▼           ▼                 │
+    │  ┌───────┐  ┌───────┐  ┌───────┐             │
+    │  │Agent 1│  │Agent 2│  │Agent 3│             │
+    │  └───────┘  └───────┘  └───────┘             │
+    └─────────────────────────────────────────────────┘
+    
+    ┌─────────────────────────────────────────────────┐
+    │           Context Caching Strategy              │
+    │                                                 │
+    │  Request → ┌─────────┐ → Cache Hit? → Return  │
+    │            │  Cache  │                          │
+    │            └─────────┘                          │
+    │                 │                               │
+    │            Cache Miss                           │
+    │                 │                               │
+    │                 ▼                               │
+    │         ┌──────────────┐                       │
+    │         │ Context Store│                       │
+    │         └──────────────┘                       │
+    │                 │                               │
+    │                 ▼                               │
+    │         Update Cache → Return                  │
+    └─────────────────────────────────────────────────┘
+```
 
 1. **Parallel Agent Execution**: When agents don't have dependencies, execute in parallel
 2. **Context Caching**: Cache frequently accessed context to reduce retrieval time
