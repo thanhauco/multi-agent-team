@@ -10,6 +10,7 @@ from multi_agent.workflow.models import (
     PhaseValidationResult,
     ValidationRule,
 )
+from multi_agent.workflow.persistence import WorkflowPersistence
 from multi_agent.core.models import (
     AgentOutput,
     AgentRole,
@@ -32,6 +33,7 @@ class WorkflowManager:
         self.storage_path.mkdir(parents=True, exist_ok=True)
         self.workflows: Dict[str, WorkflowState] = {}
         self.validation_rules: Dict[WorkflowPhase, List[ValidationRule]] = {}
+        self.persistence = WorkflowPersistence(self.storage_path)
 
     def initialize_workflow(self, config: WorkflowConfig) -> str:
         """Initialize a new workflow.
@@ -230,3 +232,36 @@ class WorkflowManager:
             return []
         
         return self.workflows[workflow_id].transitions
+
+
+    def save_workflow(self, workflow_id: str) -> None:
+        """Save workflow state to disk.
+        
+        Args:
+            workflow_id: ID of workflow to save
+        """
+        if workflow_id in self.workflows:
+            self.persistence.save(self.workflows[workflow_id])
+
+    def load_workflow(self, workflow_id: str) -> bool:
+        """Load workflow state from disk.
+        
+        Args:
+            workflow_id: ID of workflow to load
+            
+        Returns:
+            True if loaded successfully, False otherwise
+        """
+        state = self.persistence.load(workflow_id)
+        if state:
+            self.workflows[workflow_id] = state
+            return True
+        return False
+
+    def list_saved_workflows(self) -> list[str]:
+        """List all saved workflow IDs.
+        
+        Returns:
+            List of workflow IDs
+        """
+        return self.persistence.list_workflows()

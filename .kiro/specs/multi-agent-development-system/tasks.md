@@ -30,7 +30,7 @@
     - Implement ValidationResult and ValidationError models
     - _Requirements: 2.3_
 
-  - [-] 3.2 Implement WorkflowManager class
+  - [x] 3.2 Implement WorkflowManager class
     - Write initialize_workflow method
     - Create transition_phase with validation logic
     - Implement validate_phase_completion method
@@ -38,7 +38,7 @@
     - Create get_current_phase method
     - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
-  - [ ] 3.3 Implement workflow state persistence
+  - [-] 3.3 Implement workflow state persistence
     - Store workflow state to disk
     - Load and restore workflow state
     - _Requirements: 2.3_
