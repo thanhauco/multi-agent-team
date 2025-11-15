@@ -25,15 +25,19 @@
 A structured multi-agent AI workflow system that coordinates specialized AI agents to handle complex software development tasks from product analysis to deployment.
 
 ```
+    Software Development Track:
     Product Analyst → Architect → Developer → Debugger → Code Reviewer
-         │               │            │           │            │
-         └───────────────┴────────────┴───────────┴────────────┘
-                              │
-                        Orchestrator
-                              │
-                    ┌─────────┴─────────┐
-                    │                   │
-              Context Manager    Workflow Manager
+    
+    ML/AI Development Track:
+    Data Scientist → AI Engineer → ML Engineer
+         │               │              │
+         └───────────────┴──────────────┘
+                         │
+                   Orchestrator
+                         │
+              ┌──────────┴──────────┐
+              │                     │
+        Context Manager      Workflow Manager
 ```
 
 ## Overview
@@ -45,8 +49,9 @@ This project implements a disciplined multi-agent development team that reduces 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  🤖 Specialized Agent Roles                                 │
-│     Product Analyst │ Architect │ Developer                │
-│     Debugger │ Code Reviewer                               │
+│     Software: Product Analyst │ Architect │ Developer      │
+│               Debugger │ Code Reviewer                      │
+│     ML/AI: Data Scientist │ AI Engineer │ ML Engineer      │
 ├─────────────────────────────────────────────────────────────┤
 │  🔄 Structured Workflow                                     │
 │     Sequential phases with automatic coordination           │
@@ -68,8 +73,11 @@ This project implements a disciplined multi-agent development team that reduces 
 └─────────────────────────────────────────────────────────────┘
 ```
 
-- **Specialized Agent Roles**: Product Analyst, Architect, Developer, Debugger, and Code Reviewer agents with distinct responsibilities
+- **Specialized Agent Roles**: 
+  - **Software Track**: Product Analyst, Architect, Developer, Debugger, Code Reviewer
+  - **ML/AI Track**: Data Scientist, AI Engineer, ML Engineer
 - **Structured Workflow**: Sequential phases from analysis through deployment with automatic coordination
+- **ML/AI Support**: End-to-end ML development from data analysis to model deployment
 - **Architecture Enforcement**: Prevents technical debt through enforced design rules and patterns
 - **Automated Debugging**: Agents debug each other's output before manual review
 - **Context Sharing**: Maintains shared knowledge across all agents for consistency
@@ -132,13 +140,75 @@ The system consists of:
 - **Configuration System**: Markdown templates for agent customization
 - **Logging & Monitoring**: Complete visibility into agent activities
 
+## ML/AI Agent Roles
+
+The system includes specialized agents for machine learning and AI development:
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    ML/AI Development Pipeline                        │
+│                                                                      │
+│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐         │
+│  │    Data      │───▶│      AI      │───▶│      ML      │         │
+│  │  Scientist   │    │   Engineer   │    │   Engineer   │         │
+│  └──────────────┘    └──────────────┘    └──────────────┘         │
+│         │                    │                    │                 │
+│    EDA & Features      Architecture &       Training &             │
+│    Engineering         Model Selection      Optimization           │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### 🔬 Data Scientist Agent
+- **Exploratory Data Analysis (EDA)**: Profiling, distributions, correlations
+- **Feature Engineering**: Transformations, encodings, feature selection
+- **Statistical Analysis**: Hypothesis testing, significance testing
+- **Data Quality**: Missing values, outliers, data validation
+- **Outputs**: EDA notebooks, feature pipelines, data quality reports
+
+### 🏗️ AI Engineer Agent
+- **System Architecture**: End-to-end AI system design
+- **Model Selection**: Framework and model evaluation
+- **Production Deployment**: API design, scaling, monitoring
+- **Integration**: Model serving infrastructure
+- **Outputs**: Architecture diagrams, API specs, deployment configs
+
+### ⚙️ ML Engineer Agent
+- **Training Pipelines**: Data loading, preprocessing, training loops
+- **Model Optimization**: Hyperparameter tuning, architecture search
+- **Experiment Tracking**: MLflow, Weights & Biases integration
+- **Model Packaging**: Serialization, containerization, deployment
+- **Outputs**: Training scripts, model artifacts, Docker images
+
+### ML Workflow Example
+
+```
+Project: Customer Churn Prediction
+
+1. Product Analyst → Define problem & success metrics
+2. Data Scientist → Analyze data, engineer features
+3. AI Engineer → Design system architecture, select model
+4. Architect → Validate against overall architecture
+5. ML Engineer → Build training pipeline, optimize model
+6. Developer → Integrate ML API into application
+7. Debugger → Test integration, edge cases, performance
+8. Code Reviewer → Review ML code & best practices
+9. AI Engineer → Deploy to production with monitoring
+```
+
 ## Use Cases
 
-- Building complex AI products end-to-end
+### Software Development
+- Building complex applications end-to-end
 - Maintaining large codebases with multiple modules
 - Enforcing architectural patterns across teams
 - Reducing debugging time through automated validation
-- Learning MLOps/AIOps concepts through structured implementation
+
+### ML/AI Development
+- End-to-end ML model development and deployment
+- Data analysis and feature engineering pipelines
+- Production ML system architecture and deployment
+- MLOps best practices and experiment tracking
+- AI product development from prototype to production
 
 ## Advanced Features (Roadmap)
 

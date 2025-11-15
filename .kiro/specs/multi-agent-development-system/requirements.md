@@ -7,7 +7,7 @@ This document specifies the requirements for a Multi-Agent Development System th
 ## Glossary
 
 - **Multi-Agent System**: A coordinated collection of specialized AI agents working together to accomplish development tasks
-- **Agent Role**: A specific responsibility assigned to an AI agent (e.g., Architect, Developer, Debugger, Reviewer)
+- **Agent Role**: A specific responsibility assigned to an AI agent (e.g., Architect, Developer, Debugger, Reviewer, Data Scientist, AI Engineer, ML Engineer)
 - **System Prompt**: Configuration instructions that define an agent's behavior, constraints, and responsibilities
 - **Agent Orchestrator**: The component responsible for coordinating agent interactions and workflow execution
 - **Context Manager**: The component that maintains and shares relevant information across agents
@@ -15,6 +15,9 @@ This document specifies the requirements for a Multi-Agent Development System th
 - **Vibe Coding**: Unstructured, ad-hoc coding without clear architecture or design patterns
 - **Agent Output**: Code, documentation, or analysis produced by an agent
 - **Architecture Rules**: Predefined design patterns and structural constraints enforced across the codebase
+- **Data Scientist Agent**: Specialized agent for data analysis, feature engineering, and statistical modeling
+- **AI Engineer Agent**: Specialized agent for AI system design, model integration, and production deployment
+- **ML Engineer Agent**: Specialized agent for ML pipeline development, model training, and optimization
 
 ## Requirements
 
@@ -137,3 +140,64 @@ This document specifies the requirements for a Multi-Agent Development System th
 3. WHEN conflicts arise, THE Multi-Agent System SHALL pause and request manual resolution
 4. THE Multi-Agent System SHALL support branch-based workflows for parallel development
 5. THE Multi-Agent System SHALL tag releases with workflow completion metadata
+
+
+### Requirement 11
+
+**User Story:** As a data scientist, I want a Data Scientist agent to handle data analysis and feature engineering, so that ML models are built on solid data foundations
+
+#### Acceptance Criteria
+
+1. THE Multi-Agent System SHALL support a Data Scientist agent role with expertise in data analysis, statistics, and feature engineering
+2. THE Data Scientist agent SHALL perform exploratory data analysis (EDA) and generate insights about data distributions, correlations, and anomalies
+3. THE Data Scientist agent SHALL design and implement feature engineering pipelines including transformations, encodings, and feature selection
+4. THE Data Scientist agent SHALL validate data quality and identify missing values, outliers, and data inconsistencies
+5. WHEN the Data Scientist agent completes analysis, THE Multi-Agent System SHALL store data profiling reports and feature specifications in the shared context
+
+### Requirement 12
+
+**User Story:** As an AI engineer, I want an AI Engineer agent to design and integrate AI systems, so that AI capabilities are properly architected and deployed
+
+#### Acceptance Criteria
+
+1. THE Multi-Agent System SHALL support an AI Engineer agent role with expertise in AI system design, model selection, and production deployment
+2. THE AI Engineer agent SHALL design end-to-end AI system architectures including data pipelines, model serving, and monitoring
+3. THE AI Engineer agent SHALL select appropriate models and frameworks based on requirements, constraints, and performance targets
+4. THE AI Engineer agent SHALL implement model serving infrastructure with APIs, load balancing, and scaling capabilities
+5. THE AI Engineer agent SHALL design monitoring and observability systems for tracking model performance, drift, and system health
+
+### Requirement 13
+
+**User Story:** As an ML engineer, I want an ML Engineer agent to build training pipelines and optimize models, so that ML systems are efficient and performant
+
+#### Acceptance Criteria
+
+1. THE Multi-Agent System SHALL support an ML Engineer agent role with expertise in ML pipelines, training optimization, and model deployment
+2. THE ML Engineer agent SHALL design and implement training pipelines including data loading, preprocessing, training loops, and validation
+3. THE ML Engineer agent SHALL optimize model performance through hyperparameter tuning, architecture search, and training strategies
+4. THE ML Engineer agent SHALL implement model versioning, experiment tracking, and reproducibility mechanisms
+5. THE ML Engineer agent SHALL create deployment artifacts including model serialization, containerization, and deployment scripts
+
+### Requirement 14
+
+**User Story:** As a developer, I want ML/AI agents to coordinate with software development agents, so that ML systems integrate seamlessly with application code
+
+#### Acceptance Criteria
+
+1. WHEN an ML/AI workflow is initiated, THE Multi-Agent System SHALL coordinate Data Scientist, AI Engineer, and ML Engineer agents in sequence
+2. THE Multi-Agent System SHALL enable the Architect agent to validate ML system designs against overall architecture rules
+3. THE Developer agent SHALL integrate ML model APIs and inference code into application logic
+4. THE Debugger agent SHALL test ML system integration including edge cases, error handling, and performance
+5. THE Code Reviewer agent SHALL review ML code for best practices including model validation, error handling, and monitoring
+
+### Requirement 15
+
+**User Story:** As a data scientist, I want the system to support ML-specific workflows, so that data science tasks follow best practices
+
+#### Acceptance Criteria
+
+1. THE Multi-Agent System SHALL support ML-specific workflow phases: data analysis, feature engineering, model development, training, evaluation, and deployment
+2. WHEN ML workflow phases execute, THE Multi-Agent System SHALL validate outputs against ML best practices (train/test split, cross-validation, metric selection)
+3. THE Multi-Agent System SHALL track ML experiments including hyperparameters, metrics, and model artifacts
+4. THE Multi-Agent System SHALL enforce ML-specific quality gates (minimum accuracy, maximum latency, fairness metrics)
+5. THE Multi-Agent System SHALL generate ML documentation including model cards, data sheets, and deployment guides
