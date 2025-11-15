@@ -83,12 +83,12 @@
     - _Requirements: 1.1, 7.5_
 
 - [ ] 6. Implement base Agent class and specialized agents
-  - [-] 6.1 Create base Agent abstract class
+  - [x] 6.1 Create base Agent abstract class
     - Define Agent interface with execute, validate_output, format_prompt methods
     - Implement common initialization logic
     - _Requirements: 1.4, 1.5_
 
-  - [ ] 6.2 Implement ProductAnalystAgent
+  - [-] 6.2 Implement ProductAnalystAgent
     - Create agent class extending base Agent
     - Implement execute method for requirements analysis
     - Add output validation
