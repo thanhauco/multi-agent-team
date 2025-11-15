@@ -12,14 +12,14 @@
     - Implement Context class for aggregating multiple entries
     - _Requirements: 3.1, 3.4_
 
-  - [-] 2.2 Implement ContextManager class with storage and retrieval
+  - [x] 2.2 Implement ContextManager class with storage and retrieval
     - Write store_output method to persist agent outputs with metadata
     - Implement get_context_for_agent to retrieve relevant context
     - Create track_dependency method for dependency management
     - Add get_context_history and clear_context methods
     - _Requirements: 3.1, 3.2, 3.3, 3.5_
 
-  - [ ] 2.3 Implement file-based context persistence
+  - [-] 2.3 Implement file-based context persistence
     - Create JSON-based storage for context entries
     - Implement load and save operations
     - _Requirements: 3.5_

@@ -4,6 +4,7 @@ from typing import Any, Dict, List, Optional
 from pathlib import Path
 
 from multi_agent.context.models import Context, ContextEntry
+from multi_agent.context.persistence import ContextPersistence
 from multi_agent.core.models import AgentOutput, AgentRole
 
 
@@ -19,6 +20,7 @@ class ContextManager:
         self.context = Context()
         self.storage_path = storage_path or Path(".multi_agent/context")
         self._dependency_graph: Dict[str, List[str]] = {}
+        self.persistence = ContextPersistence(self.storage_path)
 
     def store_output(
         self,
@@ -127,3 +129,26 @@ class ContextManager:
             List of context entries from that role
         """
         return self.context.get_by_agent_role(role)
+
+
+    def save(self, filename: str = "context.json") -> None:
+        """Save context to disk.
+        
+        Args:
+            filename: Name of the file to save to
+        """
+        self.persistence.save(self.context, filename)
+
+    def load(self, filename: str = "context.json") -> None:
+        """Load context from disk.
+        
+        Args:
+            filename: Name of the file to load from
+        """
+        self.context = self.persistence.load(filename)
+        
+        # Rebuild dependency graph
+        self._dependency_graph = {}
+        for entry in self.context.entries:
+            if entry.dependencies:
+                self._dependency_graph[entry.id] = entry.dependencies
