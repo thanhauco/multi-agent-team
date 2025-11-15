@@ -43,7 +43,7 @@
     - Load and restore workflow state
     - _Requirements: 2.3_
 
-- [ ] 4. Implement LLM Provider abstraction
+- [x] 4. Implement LLM Provider abstraction
   - [x] 4.1 Create LLMProvider base class and configuration
     - Define abstract LLMProvider interface with generate methods
     - Create GenerationConfig dataclass
@@ -55,13 +55,13 @@
     - Add error handling and retry logic
     - _Requirements: 1.4_
 
-  - [-] 4.3 Implement OpenAI provider as alternative
+  - [x] 4.3 Implement OpenAI provider as alternative
     - Create OpenAIProvider class
     - Implement same interface as Claude provider
     - _Requirements: 1.4_
 
 - [ ] 5. Implement Agent Loader and template system
-  - [ ] 5.1 Create agent template parser
+  - [-] 5.1 Create agent template parser
     - Parse markdown template files
     - Extract sections (responsibilities, constraints, system prompt, validation rules)
     - Support template variables
