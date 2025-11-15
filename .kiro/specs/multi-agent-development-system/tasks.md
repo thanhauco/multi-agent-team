@@ -55,7 +55,7 @@
     - Add error handling and retry logic
     - _Requirements: 1.4_
 
-  - [ ] 4.3 Implement OpenAI provider as alternative
+  - [-] 4.3 Implement OpenAI provider as alternative
     - Create OpenAIProvider class
     - Implement same interface as Claude provider
     - _Requirements: 1.4_
