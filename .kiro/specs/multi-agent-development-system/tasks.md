@@ -24,7 +24,7 @@
     - Implement load and save operations
     - _Requirements: 3.5_
 
-- [ ] 3. Implement Workflow Manager
+- [x] 3. Implement Workflow Manager
   - [x] 3.1 Create workflow state models
     - Define WorkflowConfig and WorkflowState dataclasses
     - Implement ValidationResult and ValidationError models
@@ -38,13 +38,13 @@
     - Create get_current_phase method
     - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
-  - [-] 3.3 Implement workflow state persistence
+  - [x] 3.3 Implement workflow state persistence
     - Store workflow state to disk
     - Load and restore workflow state
     - _Requirements: 2.3_
 
 - [ ] 4. Implement LLM Provider abstraction
-  - [ ] 4.1 Create LLMProvider base class and configuration
+  - [-] 4.1 Create LLMProvider base class and configuration
     - Define abstract LLMProvider interface with generate methods
     - Create GenerationConfig dataclass
     - _Requirements: 1.4_
