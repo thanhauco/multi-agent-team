@@ -44,12 +44,12 @@
     - _Requirements: 2.3_
 
 - [ ] 4. Implement LLM Provider abstraction
-  - [-] 4.1 Create LLMProvider base class and configuration
+  - [x] 4.1 Create LLMProvider base class and configuration
     - Define abstract LLMProvider interface with generate methods
     - Create GenerationConfig dataclass
     - _Requirements: 1.4_
 
-  - [ ] 4.2 Implement Claude provider
+  - [-] 4.2 Implement Claude provider
     - Create ClaudeProvider class using Anthropic SDK
     - Implement generate and generate_structured methods
     - Add error handling and retry logic
