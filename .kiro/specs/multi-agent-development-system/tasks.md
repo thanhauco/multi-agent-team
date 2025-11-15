@@ -7,12 +7,12 @@
   - _Requirements: 1.1, 1.2_
 
 - [ ] 2. Implement Context Manager
-  - [-] 2.1 Create ContextEntry and Context data models
+  - [x] 2.1 Create ContextEntry and Context data models
     - Define ContextEntry dataclass with id, agent_role, output, metadata, timestamp, dependencies
     - Implement Context class for aggregating multiple entries
     - _Requirements: 3.1, 3.4_
 
-  - [ ] 2.2 Implement ContextManager class with storage and retrieval
+  - [-] 2.2 Implement ContextManager class with storage and retrieval
     - Write store_output method to persist agent outputs with metadata
     - Implement get_context_for_agent to retrieve relevant context
     - Create track_dependency method for dependency management
