@@ -1,0 +1,32 @@
+# Architecture Rules Configuration
+
+rules:
+  - id: no_circular_dependencies
+    name: No Circular Dependencies
+    description: Modules must not have circular dependencies
+    severity: error
+    enabled: true
+
+  - id: layered_architecture
+    name: Layered Architecture
+    description: Follow layered architecture pattern
+    severity: error
+    enabled: true
+
+  - id: dependency_injection
+    name: Dependency Injection
+    description: Use dependency injection for loose coupling
+    severity: warning
+    enabled: true
+
+  - id: single_responsibility
+    name: Single Responsibility
+    description: Each module should have single responsibility
+    severity: warning
+    enabled: true
+
+  - id: api_documentation
+    name: API Documentation
+    description: All public APIs must be documented
+    severity: error
+    enabled: true
