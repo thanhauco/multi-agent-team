@@ -1,0 +1,14 @@
+system:
+  agent_templates_dir: "agents/templates"
+  custom_templates_dir: "agents/custom"
+  context_store_path: ".multi_agent/context"
+  log_dir: ".multi_agent/logs"
+
+workflow:
+  default_workflow: "workflows/default_workflow.yaml"
+  max_rollback_attempts: 3
+  validation_timeout: 300
+
+agents:
+  max_retry_attempts: 3
+  timeout: 600

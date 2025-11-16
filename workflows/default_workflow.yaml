@@ -1,0 +1,30 @@
+name: "Default Software Development Workflow"
+description: "Standard workflow for software development projects"
+
+phases:
+  - analysis
+  - architecture
+  - implementation
+  - debugging
+  - review
+
+agent_roles:
+  - product_analyst
+  - architect
+  - developer
+  - debugger
+  - code_reviewer
+
+validation_rules:
+  implementation:
+    - "code_must_pass_linting"
+    - "tests_must_pass"
+    - "coverage_above_80_percent"
+  
+  review:
+    - "no_critical_issues"
+    - "documentation_complete"
+
+metadata:
+  version: "1.0"
+  created_by: "multi-agent-system"
